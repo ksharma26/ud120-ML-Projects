@@ -6,7 +6,6 @@ from class_vis import prettyPicture
 
 features_train, labels_train, features_test, labels_test = makeTerrainData()
 
-
 ### the training data (features_train, labels_train) have both "fast" and "slow"
 ### points mixed together--separate them so we can give them different colors
 ### in the scatterplot and identify them visually
@@ -31,6 +30,26 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.metrics import accuracy_score
+
+
+clf = KNeighborsClassifier(n_neighbors=5)
+clf.fit(features_train, labels_train)
+prid_KN = clf.predict(features_test)
+print("Accurany score K nearest neighour: ", accuracy_score(labels_test,prid_KN))
+
+clf_random = RandomForestClassifier(n_estimators=10)
+clf_random.fit(features_train, labels_train)
+prid_RandomForest = clf_random.predict(features_test)
+print("Accurany score Random Forest: ", accuracy_score(labels_test,prid_RandomForest))
+
+
+clf_ada = AdaBoostClassifier(n_estimators=10)
+clf_ada.fit(features_train, labels_train)
+prid_ada = clf_ada.predict(features_test)
+print("Accurany score Ada Boost: ", accuracy_score(labels_test,prid_ada))
 
 
 
